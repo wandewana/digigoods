@@ -1,0 +1,46 @@
+---
+name: Continuous Integration (CI)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Run tests
+        run: ./mvnw clean test
+
+      - name: Print coverage summary
+        run: |
+          echo "=== Code Coverage Summary ==="
+          if [ -f target/site/jacoco/index.html ]; then
+            # Extract line coverage percentage from JaCoCo HTML report
+            COVERAGE=$(grep -o 'Total[^%]*[0-9]\+%' target/site/jacoco/index.html | grep -o '[0-9]\+%' | head -1)
+            echo "Total Line Coverage: $COVERAGE"
+          else
+            echo "Coverage report not found"
+          fi
+
+      - name: Upload test coverage reports as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: target/site/jacoco/
+          retention-days: 7
+          compression-level: 9

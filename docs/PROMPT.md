@@ -1,8 +1,5 @@
 ### **Product Requirements Document: Digigoods API (v1)**
 
-**Version:** 1.0
-**Date:** Wednesday, 6 August 2025
-
 #### **1. Introduction**
 
 This document specifies the functional and non-functional requirements for the Digigoods API. The purpose of this API is to provide a secure, reliable, and transactionally-safe endpoint for processing customer orders, including the validation and application of various percentage-based discounts.
@@ -73,6 +70,7 @@ The checkout process must be executed in the following sequence:
     *   **Framework:** Spring Boot
     *   **Database:** PostgreSQL
     *   **Data Access:** Spring Data JPA / Hibernate
+    *   **Data Migration:** Liquibase
 
 ---
 

@@ -6,7 +6,6 @@ import com.example.digigoods.model.User;
 import com.example.digigoods.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +35,7 @@ public class AuthService {
    * @throws AuthenticationException if authentication fails
    */
   public LoginResponse login(LoginRequest loginRequest) {
-    Authentication authentication = authenticationManager.authenticate(
+    authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(
             loginRequest.getUsername(),
             loginRequest.getPassword()

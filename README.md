@@ -12,9 +12,11 @@ The other features present in the API are:
 - Get list of products available in the marketplace
 - Get list of discounts available in the marketplace
 
+
+
 ## AI Assistance Disclosure
 
-[Gemini 2.5 Pro API](https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-5-pro) was used to help brainstorm and refine the requirements, while [Augment Code](https://www.augmentcode.com/) served as an AI chat assistant and agent during development of the project.
+[Gemini 2.5 Pro API](https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-5-pro) was used to help brainstorm and refine the requirements, while [Augment Code](https://www.augmentcode.com/) served as an AI chat assistant and agent during development of the project. The requirements are documented in [`docs/PROMPT.md`](./docs/PROMPT.md).
 
 ## License
 

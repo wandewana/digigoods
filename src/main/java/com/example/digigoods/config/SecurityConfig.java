@@ -2,7 +2,6 @@ package com.example.digigoods.config;
 
 import com.example.digigoods.security.JwtAuthenticationEntryPoint;
 import com.example.digigoods.security.JwtAuthenticationFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,7 +24,6 @@ public class SecurityConfig {
   private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
   private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-  @Autowired
   public SecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
                         JwtAuthenticationFilter jwtAuthenticationFilter) {
     this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;

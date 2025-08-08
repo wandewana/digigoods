@@ -4,7 +4,6 @@ import com.example.digigoods.dto.LoginRequest;
 import com.example.digigoods.dto.LoginResponse;
 import com.example.digigoods.model.User;
 import com.example.digigoods.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,9 +20,8 @@ public class AuthService {
   private final JwtService jwtService;
   private final UserRepository userRepository;
 
-  @Autowired
-  public AuthService(AuthenticationManager authenticationManager, 
-                     JwtService jwtService, 
+  public AuthService(AuthenticationManager authenticationManager,
+                     JwtService jwtService,
                      UserRepository userRepository) {
     this.authenticationManager = authenticationManager;
     this.jwtService = jwtService;

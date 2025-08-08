@@ -11,7 +11,8 @@ databaseChangeLog:
                   value: testuser
               - column:
                   name: password
-                  value: $2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2uheWG/igi. # password
+                  # password
+                  value: $2a$10$TarSKmGoxoU/pLOiv0wQe.XYDtcBDd2zQuCGeZYQ0JxrSmPQwPQ1e
         - insert:
             tableName: products
             columns:

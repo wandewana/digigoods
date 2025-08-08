@@ -7,7 +7,6 @@ import com.example.digigoods.service.CheckoutService;
 import com.example.digigoods.service.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +23,6 @@ public class CheckoutController {
   private final CheckoutService checkoutService;
   private final JwtService jwtService;
 
-  @Autowired
   public CheckoutController(CheckoutService checkoutService, JwtService jwtService) {
     this.checkoutService = checkoutService;
     this.jwtService = jwtService;
@@ -40,7 +38,7 @@ public class CheckoutController {
   @PostMapping
   public ResponseEntity<OrderResponse> createOrder(
       @Valid @RequestBody CheckoutRequest checkoutRequest,
-                                                   HttpServletRequest request) {
+      HttpServletRequest request) {
     // Extract user ID from JWT token
     String token = extractTokenFromRequest(request);
     if (token == null) {

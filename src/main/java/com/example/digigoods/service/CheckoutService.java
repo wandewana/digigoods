@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,7 +35,6 @@ public class CheckoutService {
   private final OrderRepository orderRepository;
   private final UserRepository userRepository;
 
-  @Autowired
   public CheckoutService(ProductService productService,
                          DiscountService discountService,
                          OrderRepository orderRepository,

@@ -5,7 +5,6 @@ import com.example.digigoods.model.Discount;
 import com.example.digigoods.repository.DiscountRepository;
 import java.time.LocalDate;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +15,6 @@ public class DiscountService {
 
   private final DiscountRepository discountRepository;
 
-  @Autowired
   public DiscountService(DiscountRepository discountRepository) {
     this.discountRepository = discountRepository;
   }
@@ -34,27 +32,27 @@ public class DiscountService {
     }
 
     List<Discount> discounts = discountRepository.findAllByCodeIn(discountCodes);
-    
+
     // Check if all codes were found
     if (discounts.size() != discountCodes.size()) {
       List<String> foundCodes = discounts.stream()
           .map(Discount::getCode)
           .toList();
-      
+
       String missingCode = discountCodes.stream()
           .filter(code -> !foundCodes.contains(code))
           .findFirst()
           .orElse("unknown");
-      
+
       throw new InvalidDiscountException(missingCode, "discount code not found");
     }
-    
+
     // Validate each discount
     LocalDate today = LocalDate.now();
     for (Discount discount : discounts) {
       validateDiscount(discount, today);
     }
-    
+
     return discounts;
   }
 
@@ -75,11 +73,11 @@ public class DiscountService {
     if (today.isBefore(discount.getValidFrom())) {
       throw new InvalidDiscountException(discount.getCode(), "discount is not yet valid");
     }
-    
+
     if (today.isAfter(discount.getValidUntil())) {
       throw new InvalidDiscountException(discount.getCode(), "discount has expired");
     }
-    
+
     // Check if discount has remaining uses
     if (discount.getRemainingUses() <= 0) {
       throw new InvalidDiscountException(discount.getCode(), "discount has no remaining uses");

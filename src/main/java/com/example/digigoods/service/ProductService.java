@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,7 +18,6 @@ public class ProductService {
 
   private final ProductRepository productRepository;
 
-  @Autowired
   public ProductService(ProductRepository productRepository) {
     this.productRepository = productRepository;
   }
@@ -33,20 +31,20 @@ public class ProductService {
    */
   public List<Product> getProductsByIds(List<Long> productIds) {
     List<Product> products = productRepository.findAllByIdIn(productIds);
-    
+
     if (products.size() != productIds.size()) {
       // Find missing product IDs
       List<Long> foundIds = products.stream()
           .map(Product::getId)
           .collect(Collectors.toList());
-      
+
       List<Long> missingIds = productIds.stream()
           .filter(id -> !foundIds.contains(id))
           .collect(Collectors.toList());
-      
+
       throw new ProductNotFoundException("Products not found with IDs: " + missingIds);
     }
-    
+
     return products;
   }
 
@@ -60,23 +58,23 @@ public class ProductService {
     // Count quantities for each product
     Map<Long, Long> productQuantities = productIds.stream()
         .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-    
+
     // Get all unique products
     List<Product> products = getProductsByIds(productQuantities.keySet().stream()
         .collect(Collectors.toList()));
-    
+
     // Validate stock availability
     for (Product product : products) {
       Long requestedQuantity = productQuantities.get(product.getId());
       if (product.getStock() < requestedQuantity) {
         throw new InsufficientStockException(
-            product.getId(), 
-            requestedQuantity.intValue(), 
+            product.getId(),
+            requestedQuantity.intValue(),
             product.getStock()
         );
       }
     }
-    
+
     // Update stock
     for (Product product : products) {
       Long requestedQuantity = productQuantities.get(product.getId());

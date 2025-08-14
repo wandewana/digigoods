@@ -47,6 +47,8 @@ public class SecurityConfig {
         .authorizeHttpRequests(authz -> authz
             .requestMatchers("/auth/**").permitAll()
             .requestMatchers("/actuator/**").permitAll()
+            .requestMatchers("/products").permitAll()
+            .requestMatchers("/discounts").permitAll()
             .anyRequest().authenticated()
         )
         .exceptionHandling(ex -> ex.authenticationEntryPoint(jwtAuthenticationEntryPoint))

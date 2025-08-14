@@ -49,6 +49,15 @@ public class ProductService {
   }
 
   /**
+   * Get all products from the database.
+   *
+   * @return list of all products
+   */
+  public List<Product> getAllProducts() {
+    return productRepository.findAll();
+  }
+
+  /**
    * Validate and update stock for products.
    *
    * @param productIds the list of product IDs (with duplicates for quantity)

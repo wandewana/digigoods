@@ -20,6 +20,15 @@ public class DiscountService {
   }
 
   /**
+   * Get all discounts from the database.
+   *
+   * @return list of all discounts
+   */
+  public List<Discount> getAllDiscounts() {
+    return discountRepository.findAll();
+  }
+
+  /**
    * Validate and get discounts by their codes.
    *
    * @param discountCodes the list of discount codes

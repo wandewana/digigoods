@@ -190,6 +190,12 @@
             <goals>
               <goal>prepare-agent</goal>
             </goals>
+            <configuration>
+              <excludes>
+                <exclude>jdk.internal.**</exclude>
+                <exclude>sun.**</exclude>
+              </excludes>
+            </configuration>
           </execution>
           <!-- Prepare agent for integration tests -->
           <execution>
@@ -197,6 +203,12 @@
             <goals>
               <goal>prepare-agent-integration</goal>
             </goals>
+            <configuration>
+              <excludes>
+                <exclude>jdk.internal.**</exclude>
+                <exclude>sun.**</exclude>
+              </excludes>
+            </configuration>
           </execution>
           <!-- Generate unit test coverage report -->
           <execution>
